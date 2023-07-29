@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title> You have successfully registered </title>
+  <link rel="stylesheet" href="{% static 'assets/css/login.css' %}">
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="login-box">
+  <h2>You have successfully registered {{ new_user.username }}</h2>
+    <h3 style="color: white">
+        You can access the site <p><a href="{% url 'login' %}">Sign In</a></p>
+    </h3>
+</div>
+</body>
+</html>

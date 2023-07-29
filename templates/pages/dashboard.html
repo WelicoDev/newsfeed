@@ -1,0 +1,43 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block title %} Profile Page {% endblock title %}
+{% block content %}
+  <section id="contentSection">
+    <div class="row">
+      <div class="col-lg-8 col-md-8 col-sm-8">
+          <h2 class="text-center">User Profile </h2><br>
+          <form enctype="multipart/form-data" method="post">
+          <p><img src="{{ profile.photo.url }}" style="height: 200px; width: 200px ; border-radius: 50%"></p>
+              <h4><label>First Name  </label><input class="form-control" value="{{ user.first_name }}" readonly></h4>
+              <h4><label>Last Name  </label><input class="form-control" value="{{ user.last_name }}" readonly></h4>
+              <h4><label>Birthday  </label><input class="form-control" value="{{ profile.birthday }}" readonly ></h4>
+              <h4><label>Username  </label><input class="form-control" value="{{ user.username }}" readonly></h4>
+              <h4><label>Email  </label><input class="form-control" value="{{ user.email }}" readonly></h4>
+          <br>
+          <hr>
+          <button class="btn btn-success ml-2"><a href="{% url 'edit_user' %}">Edit</a> </button>
+          <button class="btn-orange btn"><a href="{% url 'password_change' %}">change password</a></button>
+          <button class="btn btn-danger"><a href="{% url 'logout' %}">logout profile</a></button>
+          </form>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-4">
+        <aside class="right_content">
+          <div class="single_sidebar">
+            <h2><span>Popular Post</span></h2>
+            <ul class="spost_nav">
+              {% for post in latest_news %}
+                  {% if forloop.counter < 8 %}
+                      <li>
+                        <div class="media wow fadeInDown"> <a href="{{ post.get_absolute_url }}" class="media-left"> <img alt="" src="{{ post.image.url }}"> </a>
+                          <div class="media-body"> <a href="{{ post.get_absolute_url }}" class="catg_title">{{ post.title }}</a> </div>
+                        </div>
+                      </li>
+                  {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+{% endblock %}

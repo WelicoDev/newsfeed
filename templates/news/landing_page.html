@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Landing Page</title>
+</head>
+<body>
+<h1>All News</h1>
+{% for post in news_list %}
+    <a href="{% url 'detail_page' post.pk %}">
+        <li>{{ post.title }}</li>
+    </a>
+{% endfor %}
+</body>
+</html>

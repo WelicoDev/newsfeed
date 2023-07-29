@@ -1,0 +1,38 @@
+{% extends 'pages/base.html' %}
+{% block title %}Iqtisodiyot News{% endblock %}
+{% load hitcount_tags %}
+{% block content %}
+    <section id="contentSection">
+    <div class="row">
+    <div class="col-lg-8 col-md-8 col-sm-8">
+        {% for post in iqtisodiyot_news %}
+            <div class="post_commentbox"> <a href=""><i class="fa fa-user"></i>{{ request.user }}</a> <span><i class="fa fa-calendar"></i>{{ post.created_time }}</span> <a href="#"><i class="fa fa-tags"></i>Economy <i class="fa fa-eye"></i>Seen : {% get_hit_count for post %}  </a></div>
+            <a href="{{ post.get_absolute_url }}">
+                <div>
+                    <div class="single_page_content"> <img class="img-center" src="{{ post.image.url }}" alt="">
+                   <h3 style="color: black">{{ post.title }}</h3>
+                   <h4>{{ post.content }}</h4>
+                </div>
+            </a>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4">
+        <aside class="right_content">
+          <div class="single_sidebar">
+            <h2><span>Popular Post</span></h2>
+            <ul class="spost_nav">
+              {% for post in iqtisodiyot_news %}
+                      <li>
+                        <div class="media wow fadeInDown"> <a href="{{ post.get_absolute_url }}" class="media-left"> <img alt="" src="{{ post.image.url }}"> </a>
+                          <div class="media-body"> <a href="{{ post.get_absolute_url }}" class="catg_title">{{ post.title }}</a> </div>
+                        </div>
+                      </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+</section>
+{% endblock content %}

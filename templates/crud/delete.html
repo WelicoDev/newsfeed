@@ -1,0 +1,17 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block title %} Delete Page {% endblock %}
+{% block content %}
+<section id="contentSection">
+    <div class="row">
+    <div class="col-lg-8 col-md-8 col-sm-8">
+    <h2 class="text-center">Delete News</h2><br>
+    <form method="post">{% csrf_token %}
+        <h4>{{ news.title | truncatewords:4 }} ... do you want to delete the headline news?</h4><br>
+        <a href="{% url 'home' %}"><button class="btn btn-blue ml-2"> Cancel </button></a>
+        <button type="submit" class="btn btn-danger ml-2"> Yes </button>
+    </form>
+      </div>
+    </div>
+</section>
+{% endblock %}

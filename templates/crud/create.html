@@ -1,0 +1,17 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block title %} Create Page {% endblock %}
+{% block content %}
+<section id="contentSection">
+    <div class="row">
+    <div class="col-lg-8 col-md-8 col-sm-8">
+    <h2 class="text-center">Add News</h2><br>
+    <form method="post" enctype="multipart/form-data">{% csrf_token %}
+           {{ form.as_p }}
+        <br>
+    <button type="submit" class="btn btn-success ml-2">Add +</button>
+    </form>
+      </div>
+    </div>
+</section>
+{% endblock %}
