@@ -10,7 +10,7 @@
 <!-- partial:index.partial.html -->
 <div class="login-box">
   <h2>Sign Up</h2>
-  <form method="post">{% csrf_token %}
+  <form method="post" enctype="multipart/form-data" >{% csrf_token %}
     <div class="user-box">
       <input type="text" name="first_name" class="form-control">
       <label>First Name</label>

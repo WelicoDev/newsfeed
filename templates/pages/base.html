@@ -4,6 +4,7 @@
 <head>
 <title>{% block title %} {% endblock title %}</title>
 {% load hitcount_tags %}
+{% load i18n %}
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,21 +34,45 @@
         <div class="header_top">
           <div class="header_top_left">
             <ul class="top_nav">
-              <li><a href="{% url 'home' %}">Home</a></li>
-              <li><a href="{% url 'contact' %}">Contact</a></li>
+              <li><a href="{% url 'home' %}">{% blocktrans %}Home{% endblocktrans %}</a></li>
+              <li><a href="{% url 'contact' %}">{% blocktranslate %}
+              	Contact
+              {% endblocktranslate %}</a></li>
                 {% if user.is_authenticated and user.is_superuser %}
-              <li><a href="{% url 'admin_page' %}">Admin</a></li>
+              <li><a href="{% url 'admin_page' %}">{% blocktranslate %}
+              	Admin
+              {% endblocktranslate %}</a></li>
                 {% endif %}
             </ul>
           </div>
           <div class="header_top_right">
             {% if request.user.is_authenticated %}
-                <p><a href="{% url 'logout' %}" style="color: red">Log out</a></p>
-                <p><a href="{% url 'profile' %}" style="color: green">My profile</a></p>
+                <p><a href="{% url 'logout' %}" style="color: red">{% blocktranslate %}
+                	Log out
+                {% endblocktranslate %}</a></p>
+                <p><a href="{% url 'profile' %}" style="color: green">{% blocktranslate %}
+                	My profile
+                {% endblocktranslate %}</a></p>
             {% else %}
-                <p><a href="{% url 'login' %}" style="color: blue">Login</a></p>
+                <p><a href="{% url 'login' %}" style="color: blue">{% blocktranslate %}
+
+                {% endblocktranslate %}</a></p>
             {% endif %}
           <p>{% now "jS F Y H:i" %}</p>
+          <p><form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+            <input name="next" type="hidden" value="{{ redirect_to }}">
+            <select name="language">
+                {% get_current_language as LANGUAGE_CODE %}
+                {% get_available_languages as LANGUAGES %}
+                {% get_language_info_list for LANGUAGES as languages %}
+                {% for language in languages %}
+                    <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                        {{ language.name_local }} ({{ language.code }})
+                    </option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Go">
+        </form></p>
           </div>
         </div>
       </div>
@@ -62,16 +87,28 @@
   <section id="navArea">
     <nav class="navbar navbar-inverse" role="navigation">
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"> <span class="sr-only">{% blocktranslate %}
+        	Toggle navigation
+        {% endblocktranslate %}</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav main_nav">
           <li class="active"><a href="{% url 'home' %}"><span class="fa fa-home desktop-home"></span><span class="mobile-show">Home</span></a></li>
-          <li><a href="{% url 'uzbekistan' %}">Uzbekistan</a></li>
-          <li><a href="{% url 'jahon' %}">Jahon</a></li>
-          <li><a href="{% url 'iqtisodiyot' %}">Iqtisodiyot</a></li>
-          <li><a href="{% url 'texnologiya' %}">Texnologiya</a></li>
-          <li><a href="{% url 'sport' %}">Sport</a></li>
+          <li><a href="{% url 'uzbekistan' %}">{% blocktranslate %}
+          	Uzbekistan
+          {% endblocktranslate %}</a></li>
+          <li><a href="{% url 'jahon' %}">{% blocktranslate %}
+          	World
+          {% endblocktranslate %}</a></li>
+          <li><a href="{% url 'iqtisodiyot' %}">{% blocktranslate %}
+          	Economy
+          {% endblocktranslate %}</a></li>
+          <li><a href="{% url 'texnologiya' %}">{% blocktranslate %}
+          	Technology
+          {% endblocktranslate %}</a></li>
+          <li><a href="{% url 'sport' %}">{% blocktranslate %}
+          	Sport
+          {% endblocktranslate %}</a></li>
           <li>
               <form method="get" action="{% url 'search' %}">{% csrf_token %}
                   <input type="search" name="q" placeholder="Search ... " class="form-control">
@@ -85,7 +122,9 @@
   <section id="newsSection">
     <div class="row">
       <div class="col-lg-12 col-md-12">
-        <div class="latest_newsarea"> <span>Latest News</span>
+        <div class="latest_newsarea"> <span>{% blocktranslate %}
+        	Latest News
+        {% endblocktranslate %}</span>
           <ul id="ticker01" class="news_sticker">
             {% for news in latest_news %}
             <li><a href="{{ news.get_absolute_url }}"><img src="{{ news.image.url }}" alt="">{{ news.title }}</a></li>
@@ -93,14 +132,14 @@
           </ul>
           <div class="social_area">
             <ul class="social_nav">
-              <li class="facebook"><a href="#"></a></li>
-              <li class="twitter"><a href="#"></a></li>
+              <li class="facebook"><a href="https://www.facebook.com/profile.php?id=100090187993774"></a></li>
+              <li class="twitter"><a href="https://twitter.com/xurramov_otabek"></a></li>
               <li class="flickr"><a href="#"></a></li>
               <li class="pinterest"><a href="#"></a></li>
               <li class="googleplus"><a href="#"></a></li>
               <li class="vimeo"><a href="#"></a></li>
-              <li class="youtube"><a href="#"></a></li>
-              <li class="mail"><a href="#"></a></li>
+              <li class="youtube"><a href="https://www.youtube.com/@welicodev"></a></li>
+              <li class="mail"><a href="https://mail.google.com/mail/u/0/#inbox"></a></li>
             </ul>
           </div>
         </div>
@@ -114,26 +153,25 @@
       <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-4">
           <div class="footer_widget wow fadeInLeftBig">
-            <h2>Flickr Images</h2>
+            <h2>{% blocktrans %}Flickr Images{% endblocktrans %}</h2>
           </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4">
           <div class="footer_widget wow fadeInDown">
             <h2>Tag</h2>
             <ul class="tag_nav">
-              <li><a href="{% url 'uzbekistan' %}">Uzbekistan</a></li>
-              <li><a href="{% url 'jahon' %}">Jahon</a></li>
-              <li><a href="{% url 'iqtisodiyot' %}">Iqtisodiyot</a></li>
-              <li><a href="{% url 'texnologiya' %}">Texnologiya</a></li>
-              <li><a href="{% url 'sport' %}">Sport</a></li>
+              <li><a href="{% url 'uzbekistan' %}">{% blocktrans %}Uzbekistan{% endblocktrans %}</a></li>
+              <li><a href="{% url 'jahon' %}">{% blocktrans %}World{% endblocktrans %}</a></li>
+              <li><a href="{% url 'iqtisodiyot' %}">{% blocktrans %}Economy{% endblocktrans %}</a></li>
+              <li><a href="{% url 'texnologiya' %}">{% blocktrans %}Technology{% endblocktrans %}</a></li>
+              <li><a href="{% url 'sport' %}">{% blocktrans %}Sport{% endblocktrans %}</a></li>
             </ul>
           </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4">
           <div class="footer_widget wow fadeInRightBig">
             <h2>Contact</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-            <address>
+              <p>{% blocktrans %}We, admins of the news site, deliver only reliable news to you{% endblocktrans %}</p>
             Perfect News,1238 S . 123 St.Suite 25 Town City 3333,USA Phone: 123-326-789 Fax: 123-546-567
             </address>
           </div>
@@ -141,8 +179,8 @@
       </div>
     </div>
     <div class="footer_bottom">
-      <p class="copyright">Copyright &copy; 2045 <a href="index.html">NewsFeed</a></p>
-      <p class="developer">Developed By Wpfreeware</p>
+      <p class="copyright"><a href="index.html">NewsFeed</a></p>
+        <p class="developer">Developer By <a href="https://t.me/welicodev">WelicoDev</a></p>
     </div>
   </footer>
 </div>

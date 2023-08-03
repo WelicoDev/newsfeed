@@ -1,6 +1,9 @@
 {% extends 'pages/base.html' %}
-{% load static %}
-{% block title %} Home {% endblock %}
+{% load static %}\
+{% load i18n %}
+{% block title %}{% blocktrans %}
+	Home
+{% endblocktrans %}{% endblock %}
 {% load hitcount_tags %}
 {% block content %}
 <section id="sliderSection">
@@ -22,7 +25,9 @@
       </div>
       <div class="col-lg-4 col-md-4 col-sm-4">
         <div class="latest_post">
-          <h2><span>So'nggi yangiliklar !</span></h2>
+          <h2><span>{% blocktrans %}
+          	Latest Post
+          {% endblocktrans %}</span></h2>
           <div class="latest_post_container">
             <div id="prev-button"><i class="fa fa-chevron-up"></i></div>
             <ul class="latest_postnav">
@@ -48,7 +53,9 @@
       <div class="col-lg-8 col-md-8 col-sm-8">
         <div class="left_content">
           <div class="single_post_content">
-            <h2><span>Uzbekiston</span></h2>
+            <h2><span>{% blocktrans %}
+            	Uzbekiston
+            {% endblocktrans %}</span></h2>
             <div class="single_post_content_left">
               <ul class="business_catgnav  wow fadeInDown">
                 <li>
@@ -78,7 +85,9 @@
           <div class="fashion_technology_area">
             <div class="fashion">
               <div class="single_post_content">
-                <h2><span>Iqtisodiyot</span></h2>
+                <h2><span>{% blocktrans %}
+                	Economy
+                {% endblocktrans %}</span></h2>
                 <ul class="business_catgnav wow fadeInDown">
                   <li>
                     <figure class="bsbig_fig"> <a href="{{ iqtisodiyot_news.0.get_absolute_url }}" class="featured_img"> <img alt="" src="{{ iqtisodiyot_news.0.image.url }}"> <span class="overlay"></span> </a>
@@ -104,7 +113,9 @@
             </div>
             <div class="technology">
               <div class="single_post_content">
-                <h2><span>Texnologiya</span></h2>
+                <h2><span>{% blocktrans %}
+                	Technology
+                {% endblocktrans %}</span></h2>
                 <ul class="business_catgnav">
                   <li>
                     <figure class="bsbig_fig wow fadeInDown"> <a href="{{ texnologiya_news.0.get_absolute_url }}" class="featured_img"> <img alt="" src="{{ texnologiya_news.0.image.url }}"> <span class="overlay"></span> </a>
@@ -130,7 +141,9 @@
             </div>
           </div>
           <div class="single_post_content">
-            <h2><span>Photography</span></h2>
+            <h2><span>{% blocktrans %}
+            	Photography
+            {% endblocktrans %}</span></h2>
             <ul class="photograph_nav  wow fadeInDown">
               <li>
                 <div class="photo_grid">
@@ -165,7 +178,9 @@
             </ul>
           </div>
           <div class="single_post_content">
-            <h2><span>Sport</span></h2>
+            <h2><span>{% blocktrans %}
+            	Sport
+            {% endblocktrans %}</span></h2>
             <div class="single_post_content_left">
               <ul class="business_catgnav">
                 <li>
@@ -197,7 +212,9 @@
       <div class="col-lg-4 col-md-4 col-sm-4">
         <aside class="right_content">
           <div class="single_sidebar">
-            <h2><span>Jahon</span></h2>
+            <h2><span>{% blocktrans %}
+            	World
+            {% endblocktrans %}</span></h2>
             <ul class="spost_nav">
               {% for post in jahon_news %}
                 {% if forloop.counter < 6 %}
@@ -220,11 +237,21 @@
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane active" id="category">
                 <ul>
-                  <li class="cat-item"><a href="{% url 'uzbekistan' %}">Uzbekistan</a></li>
-                  <li class="cat-item"><a href="{% url 'jahon' %}">Jahon</a></li>
-                  <li class="cat-item"><a href="{% url 'iqtisodiyot' %}">Iqtisodiyot</a></li>
-                  <li class="cat-item"><a href="{% url 'texnologiya' %}">Texnologiya</a></li>
-                  <li class="cat-item"><a href="{% url 'sport' %}">Sport</a></li>
+                  <li class="cat-item"><a href="{% url 'uzbekistan' %}">{% blocktrans %}
+                  	Uzbekistan
+                  {% endblocktrans %}</a></li>
+                  <li class="cat-item"><a href="{% url 'jahon' %}">{% blocktrans %}
+                  	World
+                  {% endblocktrans %}</a></li>
+                  <li class="cat-item"><a href="{% url 'iqtisodiyot' %}">{% blocktrans %}
+                  	Economy
+                  {% endblocktrans %}</a></li>
+                  <li class="cat-item"><a href="{% url 'texnologiya' %}">{% blocktrans %}
+                  	Technology
+                  {% endblocktrans %}</a></li>
+                  <li class="cat-item"><a href="{% url 'sport' %}">{% blocktrans %}
+                  	Sport
+                  {% endblocktrans %}</a></li>
                 </ul>
               </div>
               <div role="tabpanel" class="tab-pane" id="video">
@@ -248,25 +275,49 @@
             </div>
           </div>
           <div class="single_sidebar wow fadeInDown">
-            <h2><span>Sponsor</span></h2>
+            <h2><span>{% blocktrans %}
+            	Sponsor
+            {% endblocktrans %}</span></h2>
             <a class="sideAdd" href="#"><img src="{% static 'images/add_img.jpg' %}" alt=""></a> </div>
           <div class="single_sidebar wow fadeInDown">
-            <h2><span>Category Archive</span></h2>
+            <h2><span>{% blocktrans %}
+            	Category Archive
+            {% endblocktrans %}</span></h2>
             <select class="catgArchive">
-                  <option><a href="{% url 'uzbekistan' %}">Uzbekistan</a></option>
-                  <option><a href="{% url 'jahon' %}">Jahon</a></option>
-                  <option><a href="{% url 'iqtisodiyot' %}">Iqtisodiyot</a></option>
-                  <option><a href="{% url 'texnologiya' %}">Texnologiya</a></option>
-                  <option><a href="{% url 'sport' %}">Sport</a></option>
+                  <option><a href="{% url 'uzbekistan' %}">{% blocktrans %}
+                  	Uzbekistan
+                  {% endblocktrans %}</a></option>
+                  <option><a href="{% url 'jahon' %}">{% blocktrans %}
+                  	Jahon
+                  {% endblocktrans %}</a></option>
+                  <option><a href="{% url 'iqtisodiyot' %}">{% blocktrans %}
+
+                  {% endblocktrans %}</a></option>
+                  <option><a href="{% url 'texnologiya' %}">{% blocktrans %}
+
+                  {% endblocktrans %}</a></option>
+                  <option><a href="{% url 'sport' %}">{% blocktrans %}
+                  	Sport
+                  {% endblocktrans %}</a></option>
             </select>
           </div>
           <div class="single_sidebar wow fadeInDown">
-            <h2><span>Links</span></h2>
+            <h2><span>{% blocktrans %}
+            	Links
+            {% endblocktrans %}</span></h2>
             <ul>
-              <li><a href="#">Blog</a></li>
-              <li><a href="#">Rss Feed</a></li>
-              <li><a href="#">Login</a></li>
-              <li><a href="#">Life &amp; Style</a></li>
+              <li><a href="{% url 'profile' %}">{% blocktrans %}
+              	My profile
+              {% endblocktrans %}</a></li>
+              <li><a href="{% url 'contact' %}">{% blocktrans %}
+              	Contact Us
+              {% endblocktrans %}</a></li>
+              <li><a href="{% url 'login' %}">{% blocktrans %}
+              	Login
+              {% endblocktrans %}</a></li>
+              <li><a href="{% url 'register' %}">{% blocktrans %}
+              	Sign Up
+              {% endblocktrans %}</a></li>
             </ul>
           </div>
         </aside>

@@ -212,7 +212,7 @@ class NewsCreate(CreateView, OnlySuperUser):
     model = News
     template_name = 'crud/create.html'
     prepopulated_fields = {'slug': ('content',)}
-    fields = ('title', 'content', 'slug', 'image', 'body', 'category', 'status',)
+    fields = ('title','title_uz','title_en','title_ru', 'content','content_uz','content_en','content_ru', 'slug', 'image', 'body','body_uz','body_en','body_ru', 'category', 'status',)
 
 
 class NewsDelete(OnlySuperUser, DeleteView):
